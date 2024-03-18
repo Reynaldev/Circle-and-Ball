@@ -1,4 +1,10 @@
 #include "main.h"
+#include "shader.h"
+
+void frameBufferSizeCallback(GLFWwindow *window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
 
 struct
 {
@@ -26,7 +32,7 @@ struct
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(true);
 
-		glfwSetFramebufferSizeCallback(window, cab::frameBufferSizeCallback);
+		glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
 		
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
