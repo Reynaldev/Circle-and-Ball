@@ -22,7 +22,7 @@ Circle::Circle(uint32_t points)
 	// Vertices
 	int step = 360 / points;
 
-	for (int i = 0; i < 360; i += step)
+	for (size_t i = 0; i < 360; i += step)
 	{
 		float angle = (float)(i * PI / 180);
 		float x = cosf(angle);
@@ -39,7 +39,7 @@ Circle::Circle(uint32_t points)
 
 	// Indices
 	printf("Indices:\n");
-	for (int i = 1; i <= (points + 1); i++)
+	for (size_t i = 1; i <= (points + 1); i++)
 	{
 		indices.push_back(0);		// Center
 		indices.push_back(i);

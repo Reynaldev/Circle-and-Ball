@@ -102,6 +102,21 @@ int main()
 	{
 		static bool showObjectConfig = false;
 
+		static GLenum drawMode[] = {
+			GL_POINTS, 
+			GL_LINE_STRIP, 
+			GL_LINE_LOOP, 
+			GL_LINES, 
+			GL_LINE_STRIP_ADJACENCY, 
+			GL_LINES_ADJACENCY, 
+			GL_TRIANGLE_STRIP, 
+			GL_TRIANGLE_FAN, 
+			GL_TRIANGLES, 
+			GL_TRIANGLE_STRIP_ADJACENCY, 
+			GL_TRIANGLES_ADJACENCY
+		};
+		static int selectedDrawMode = 8;
+
 		App.beginDraw();
 
 		if (ImGui::BeginMainMenuBar())
@@ -128,16 +143,22 @@ int main()
 		{
 			ImGui::Begin("Circle/Ball config", &showObjectConfig);
 
-			if (ImGui::DragInt("Points", &points, 1.0f, 3, 64))
+			if (ImGui::SliderInt("Points", &points, 3, 64))
 			{
 				circle = cab::Circle(points);
 				circle.createShaderBuffer();
 			}
 
+			ImGui::Combo(
+				"Draw mode",
+				&selectedDrawMode,
+				"GL_POINTS\0GL_LINE_STRIP\0GL_LINE_LOOP\0GL_LINES\0GL_LINE_STRIP_ADJACENCY\0GL_LINES_ADJACENCY\0GL_TRIANGLE_STRIP\0GL_TRIANGLE_FAN\0GL_TRIANGLES\0GL_TRIANGLE_STRIP_ADJACENCY\0GL_TRIANGLES_ADJACENCY"
+			);
+
 			ImGui::End();
 		}
 
-		circle.draw(GL_TRIANGLES);
+		circle.draw(drawMode[selectedDrawMode]);
 
 		App.endDraw();
 	}
