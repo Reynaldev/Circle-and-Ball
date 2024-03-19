@@ -15,6 +15,8 @@ namespace cab
 	public:
 		void genShaders();
 		void createShader(const char *vf, const char *ff);
+		
+		virtual void createShaderBuffer() {};
 
 		int getProgramID() { return this->programID; }
 

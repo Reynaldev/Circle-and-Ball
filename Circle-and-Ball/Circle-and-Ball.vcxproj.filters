@@ -22,6 +22,9 @@
     <Filter Include="Library Files\ImGui">
       <UniqueIdentifier>{93f8d27e-6109-4f79-997c-70d73691cf94}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shader Files">
+      <UniqueIdentifier>{925ebfb1-1b21-46b1-8970-b9a2118b585d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="libs\glad\glad.c">
       <Filter>Library Files\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="circle.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,5 +95,16 @@
     <ClInclude Include="libs\imgui\imstb_truetype.h">
       <Filter>Library Files\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="circle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="circle.vert">
+      <Filter>Resource Files\Shader Files</Filter>
+    </None>
+    <None Include="circle.frag">
+      <Filter>Resource Files\Shader Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

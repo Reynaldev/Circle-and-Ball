@@ -1,5 +1,5 @@
 #include "main.h"
-#include "shader.h"
+#include "circle.h"
 
 void frameBufferSizeCallback(GLFWwindow *window, int width, int height)
 {
@@ -93,8 +93,15 @@ int main()
 	if (!App.init())
 		return -1;
 
+	int points = 5;
+
+	cab::Circle circle(points);
+	circle.createShaderBuffer();
+
 	while (!glfwWindowShouldClose(App.window))
 	{
+		static bool showObjectConfig = false;
+
 		App.beginDraw();
 
 		if (ImGui::BeginMainMenuBar())
@@ -103,10 +110,34 @@ int main()
 			{
 				if (ImGui::MenuItem("Exit"))
 					break;
+
+				ImGui::EndMenu();
+			}
+
+			if (ImGui::BeginMenu("Tools"))
+			{
+				ImGui::MenuItem("Config", NULL, &showObjectConfig);
+
+				ImGui::EndMenu();
 			}
 
 			ImGui::EndMainMenuBar();
 		}
+
+		if (showObjectConfig)
+		{
+			ImGui::Begin("Circle/Ball config", &showObjectConfig);
+
+			if (ImGui::DragInt("Points", &points, 1.0f, 3, 64))
+			{
+				circle = cab::Circle(points);
+				circle.createShaderBuffer();
+			}
+
+			ImGui::End();
+		}
+
+		circle.draw(GL_TRIANGLES);
 
 		App.endDraw();
 	}

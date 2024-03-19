@@ -11,7 +11,7 @@ void Shader::genShaders()
 
 void Shader::createShader(const char *vf, const char *ff)
 {
-	char *cVertex, *cFragment;
+	String cVertex, cFragment;
 	std::ifstream fileVert, fileFrag;
 
 	fileVert.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -30,8 +30,8 @@ void Shader::createShader(const char *vf, const char *ff)
 		fileVert.close();
 		fileFrag.close();
 
-		strcpy(cVertex, strVert.str().c_str());
-		strcpy(cFragment, strFrag.str().c_str());
+		cVertex = strVert.str();
+		cFragment = strFrag.str();
 	}
 	catch (const std::ifstream::failure e)
 	{
@@ -39,12 +39,15 @@ void Shader::createShader(const char *vf, const char *ff)
 		return;
 	}
 
+	const char *vertShader = cVertex.c_str();
+	const char *fragShader = cFragment.c_str();
+
 	GLuint vertex, fragment;
 	int success;
 	char infoLog[512];
 
 	vertex = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertex, 1, &cVertex, nullptr);
+	glShaderSource(vertex, 1, &vertShader, nullptr);
 	glCompileShader(vertex);
 
 	glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
@@ -56,7 +59,7 @@ void Shader::createShader(const char *vf, const char *ff)
 	}
 
 	fragment = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragment, 1, &cFragment, nullptr);
+	glShaderSource(fragment, 1, &fragShader, nullptr);
 	glCompileShader(fragment);
 
 	glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
