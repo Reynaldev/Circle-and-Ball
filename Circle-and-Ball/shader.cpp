@@ -11,7 +11,6 @@ void Shader::genShaders()
 
 void Shader::createShader(const char *vf, const char *ff)
 {
-	String cVertex, cFragment;
 	std::ifstream fileVert, fileFrag;
 
 	fileVert.exceptions(std::ifstream::failbit | std::ifstream::badbit);

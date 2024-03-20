@@ -115,7 +115,7 @@ int main()
 			GL_TRIANGLE_STRIP_ADJACENCY, 
 			GL_TRIANGLES_ADJACENCY
 		};
-		static int selectedDrawMode = 8;
+		static int selectedDrawMode = 7;
 
 		App.beginDraw();
 

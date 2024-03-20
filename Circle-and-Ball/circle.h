@@ -5,7 +5,7 @@
 
 namespace cab
 {
-	class Circle : public Shader
+	class Circle : protected Shader
 	{
 	private:
 		std::vector<float> vertices;

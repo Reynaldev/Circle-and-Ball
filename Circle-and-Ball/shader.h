@@ -12,7 +12,9 @@ namespace cab
 		GLuint VAO, VBO, EBO;
 		int programID;
 
-	public:
+	protected:
+		String cVertex, cFragment;
+
 		void genShaders();
 		void createShader(const char *vf, const char *ff);
 		
