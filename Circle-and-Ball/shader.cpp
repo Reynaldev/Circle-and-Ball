@@ -4,13 +4,23 @@ using namespace cab;
 
 void Shader::genShaders()
 {
+	if (shaderState & SHADER_GENERATED)
+		return;
+
 	glGenBuffers(1, &VBO);
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &EBO);
+
+	shaderState |= SHADER_GENERATED;
 }
 
 void Shader::createShader(const char *vf, const char *ff)
 {
+	// Skip if shader buffer is already created
+	if (shaderState & SHADER_COMPILED)
+		return;
+
+	String cVertex, cFragment;
 	std::ifstream fileVert, fileFrag;
 
 	fileVert.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -84,4 +94,6 @@ void Shader::createShader(const char *vf, const char *ff)
 
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
+
+	shaderState |= SHADER_COMPILED;
 }

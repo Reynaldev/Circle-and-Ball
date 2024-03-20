@@ -14,11 +14,6 @@ Circle::Circle(uint32_t points)
 		return;
 	}
 
-	// Center
-	//vertices.push_back(0.0f);		// X
-	//vertices.push_back(0.0f);		// Y
-	//vertices.push_back(0.0f);		// Z
-
 	// Vertices
 	int step = 360 / points;
 
@@ -33,10 +28,6 @@ Circle::Circle(uint32_t points)
 		vertices.push_back(0.0f);		// Z
 	}
 
-	//printf("Vertices:\n");
-	//for (size_t i = 0; i < (vertices.size() - 2); i += 3)
-	//	printf("\t%.1f\t%.1f\t%.1f\n", vertices[i], vertices[i + 1], vertices[i + 2]);
-
 	// Indices
 	for (uint32_t i = 0; i < points; i += 3)
 	{
@@ -46,17 +37,12 @@ Circle::Circle(uint32_t points)
 		indices.push_back(i + 2);
 	}
 
-	printf("Indices:\n");
-	for (size_t i = 0; i < indices.size(); i += 3)
-		printf("\t%d\t%d\t%d\n", indices[i], indices[i + 1], indices[i + 2]);
-
 	genShaders();
 }
 
 void Circle::createShaderBuffer()
 {
-	if (cVertex.empty() && cFragment.empty())
-		createShader("circle.vert", "circle.frag");
+	createShader("circle.vert", "circle.frag");
 
 	glBindVertexArray(getVAO());
 

@@ -6,15 +6,21 @@
 
 namespace cab
 {
+	enum Shader_State
+	{
+		SHADER_GENERATED	= 1 << 0,
+		SHADER_COMPILED		= 1 << 1
+	};
+
 	class Shader
 	{
 	private:
+		int shaderState;
+
 		GLuint VAO, VBO, EBO;
 		int programID;
 
 	protected:
-		String cVertex, cFragment;
-
 		void genShaders();
 		void createShader(const char *vf, const char *ff);
 		
