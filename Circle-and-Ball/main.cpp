@@ -143,7 +143,7 @@ int main()
 		{
 			ImGui::Begin("Circle/Ball config", &showObjectConfig);
 
-			if (ImGui::SliderInt("Points", &points, 3, 64))
+			if (ImGui::SliderInt("Points", &points, 3, 60))
 			{
 				circle = cab::Circle(points);
 				circle.createShaderBuffer();

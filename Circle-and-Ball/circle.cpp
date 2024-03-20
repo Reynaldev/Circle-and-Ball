@@ -15,9 +15,9 @@ Circle::Circle(uint32_t points)
 	}
 
 	// Center
-	vertices.push_back(0.0f);		// X
-	vertices.push_back(0.0f);		// Y
-	vertices.push_back(0.0f);		// Z
+	//vertices.push_back(0.0f);		// X
+	//vertices.push_back(0.0f);		// Y
+	//vertices.push_back(0.0f);		// Z
 
 	// Vertices
 	int step = 360 / points;
@@ -34,19 +34,21 @@ Circle::Circle(uint32_t points)
 	}
 
 	printf("Vertices:\n");
-	for (int i = 0; i < (vertices.size() - 2); i++)
+	for (size_t i = 0; i < (vertices.size() - 2); i += 3)
 		printf("\t%.1f\t%.1f\t%.1f\n", vertices[i], vertices[i + 1], vertices[i + 2]);
 
 	// Indices
-	printf("Indices:\n");
-	for (size_t i = 1; i <= (points + 1); i++)
+	for (size_t i = 0; i < points; i += 3)
 	{
-		indices.push_back(0);		// Center
+		//indices.push_back(0);		// Center
 		indices.push_back(i);
-		indices.push_back(((i + 1) % points) + 1);
-
-		printf("\t%d\t%d\t%d\n", 0, i, (i + 1) % points);
+		indices.push_back(i + 1);
+		indices.push_back(i + 2);
 	}
+
+	printf("Indices:\n");
+	for (size_t i = 0; i < indices.size(); i += 3)
+		printf("\t%d\t%d\t%d\n", indices[i], indices[i + 1], indices[i + 2]);
 
 	genShaders();
 }
